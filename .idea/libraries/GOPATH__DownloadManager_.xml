@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;DownloadManager&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../src/GoLearning" />
+      <root url="file://$PROJECT_DIR$/../src/go-gtk" />
+      <root url="file://$PROJECT_DIR$/../src/github.com" />
+      <root url="file://$PROJECT_DIR$/../src/golang.org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../src/GoLearning" />
+      <root url="file://$PROJECT_DIR$/../src/go-gtk" />
+      <root url="file://$PROJECT_DIR$/../src/github.com" />
+      <root url="file://$PROJECT_DIR$/../src/golang.org" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
