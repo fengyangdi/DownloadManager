@@ -6,6 +6,8 @@ import (
 	//"strings"
 )
 
+const ICONPATH = "images/icon.png"
+
 func main(){
 	var inTE, outTE *walk.TextEdit
 
@@ -14,28 +16,15 @@ func main(){
 		Title:"DownloadManager",
 		MinSize:Size{900, 480},
 		Layout:  VBox{Margins:Margins{0,0,0,0}},
-		Icon:getIcon(),
+		Icon:getIcon(ICONPATH),
 	}
 
 
 	/*菜单*/
 	menuItems := []MenuItem{
 		Menu{
-			Text: "&Help",
-			Items: []MenuItem{
-				Action{
-					Text:        "About",
-					OnTriggered: func() {
-						MainWindow{
-							Title:"PopWin",
-							MinSize:Size{200, 180},
-							Layout:  VBox{Margins:Margins{0,0,0,0}},
-							//Icon:walk.NewProperty(),
-
-						}.Run()
-					},
-				},
-			},
+			Text: "&任务",
+			Items: setTaskMenu(),
 		},
 		Menu{
 			Text: "&Help",
@@ -58,7 +47,7 @@ func main(){
 
 	/*工具栏*/
 	menuBody := HSplitter{
-		MaxSize:Size{900, 120},
+		MaxSize:Size{900, 100},
 		Children: []Widget{
 			TextEdit{AssignTo: &inTE},
 			TextEdit{AssignTo: &outTE, ReadOnly: true},
@@ -67,19 +56,13 @@ func main(){
 
 	/*主内容框*/
 	mainBody := HSplitter{
-		MaxSize:Size{900, 360},
+		MaxSize:Size{900, 380},
 		Children: []Widget{
-			PushButton{
-				OnClicked:func(){
-					MainWindow{
-						Title:"PopWin",
-						MinSize:Size{200, 180},
-						Layout:  VBox{Margins:Margins{0,0,0,0}},
-						//Icon:walk.NewProperty(),
+			TreeView{
+				MaxSize:Size{300,380},
 
-					}.Run()
-				},
 			},
+			TextEdit{MaxSize:Size{600,380},AssignTo: &outTE, ReadOnly: true},
 		},
 	}
 
@@ -90,6 +73,51 @@ func main(){
 }
 
 func getIcon(path string) *walk.Icon {
+	ic, err := walk.NewIconFromResource(path)
+	if err != nil {
+		return nil
+	}
 
-	return nil
+	return ic
+}
+
+func setTaskMenu() []MenuItem {
+	return []MenuItem{
+		Action{
+			Text:        "添加任务",
+			OnTriggered: func() {
+				MainWindow{
+					Title:"PopWin",
+					MinSize:Size{200, 180},
+					Layout:  VBox{Margins:Margins{0,0,0,0}},
+					//Icon:walk.NewProperty(),
+
+				}.Run()
+			},
+		},
+		Action{
+			Text:        "添加批量任务",
+			OnTriggered: func() {
+				MainWindow{
+					Title:"PopWin",
+					MinSize:Size{200, 180},
+					Layout:  VBox{Margins:Margins{0,0,0,0}},
+					//Icon:walk.NewProperty(),
+
+				}.Run()
+			},
+		},
+		Action{
+			Text:        "从剪贴板中添加批量下载",
+			OnTriggered: func() {
+				MainWindow{
+					Title:"PopWin",
+					MinSize:Size{200, 180},
+					Layout:  VBox{Margins:Margins{0,0,0,0}},
+					//Icon:walk.NewProperty(),
+
+				}.Run()
+			},
+		},
+	}
 }
