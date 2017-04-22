@@ -4,6 +4,9 @@ import (
 	"github.com/lxn/walk"
 	. "github.com/lxn/walk/declarative"
 	//"strings"
+	"image/png"
+	"io/ioutil"
+	"io"
 )
 
 const ICONPATH = "images/icon.png"
@@ -11,12 +14,14 @@ const ICONPATH = "images/icon.png"
 func main(){
 	var inTE, outTE *walk.TextEdit
 
+	ic :=getIcon(ICONPATH)
+
 	/*主窗体，设置标题，大小，布局和图标*/
 	mainWin := MainWindow{
 		Title:"DownloadManager",
 		MinSize:Size{900, 480},
 		Layout:  VBox{Margins:Margins{0,0,0,0}},
-		Icon:getIcon(ICONPATH),
+		Icon:ic,
 	}
 
 
@@ -73,11 +78,15 @@ func main(){
 }
 
 func getIcon(path string) *walk.Icon {
-	ic, err := walk.NewIconFromResource(path)
+	ioutil.ReadFile(path)
+	img, err := png.Decode(io)
+
+
+	ic, err := walk.NewIconFromFile(path)
 	if err != nil {
+		//println(err)
 		return nil
 	}
-
 	return ic
 }
 
